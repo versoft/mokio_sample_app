@@ -1,0 +1,40 @@
+.contact-form
+  = form_for Mokio::Mailer.new, remote: true, :url => { :controller => "contacts", :action => "mail"} do |f|
+    = hidden_field_tag 'menu_id', params[:menu_id] 
+    = f.text_field :name, :placeholder => t('contacts.form.name')
+    = f.text_field :email, :placeholder => t('contacts.form.email')
+    = f.text_field :title, :placeholder => t('contacts.form.subject')
+    = f.text_area :message, :placeholder => t('contacts.form.text')
+    = check_box_tag 'copy'
+    label 
+      = t('contacts.form.copy')
+    = button_tag t('contacts.form.send'), type: 'submit'
+
+#map_canvas style="height:350px;width:425px;"
+  - if @gmap.nil?
+    p Please set google map in backend!
+    
+- if @gmap      
+  - content_for :js do  
+    javascript:
+      var map;
+      function initialize() {
+        var mapOptions = {
+          zoom: #{@gmap.zoom},
+          center: new google.maps.LatLng(#{@gmap.lat}, #{@gmap.lng}),
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          zoomControlOptions: {
+              style: google.maps.ZoomControlStyle.LARGE,
+              position: google.maps.ControlPosition.RIGHT_CENTER
+          }
+        };
+        var map = new google.maps.Map(document.getElementById('map_canvas'),
+            mapOptions);
+            var myLatlng = new google.maps.LatLng(#{@gmap.lat}, #{@gmap.lng});
+        var marker = new google.maps.Marker({
+              position: myLatlng,
+              map: map
+        });
+      }
+      
+      google.maps.event.addDomListener(window, 'load', initialize);

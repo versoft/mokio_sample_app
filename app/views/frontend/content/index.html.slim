@@ -1,0 +1,5 @@
+- @contents.each do |content|
+  p = content.title.html_safe
+  p = content.intro.html_safe
+  - if content.respond_to?("slug")
+    a href="#{content.localized_slug}" = t('contents.more')

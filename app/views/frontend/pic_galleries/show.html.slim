@@ -1,0 +1,5 @@
+ul
+  - @content.data_files.each do |photo|
+    li
+      a href="#{photo.data_file.url}" 
+        img data-caption="<h5>#{photo.intro}</h5><p>#{photo.subtitle}</p>" src="#{photo.data_file.url}"

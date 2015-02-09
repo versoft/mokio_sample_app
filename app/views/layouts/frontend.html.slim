@@ -1,0 +1,50 @@
+doctype html
+html
+  head
+
+    = render :partial => "/frontend/layout_elements/meta" if @meta
+
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    script src="https://maps.googleapis.com/maps/api/js?sensor=false"
+    = stylesheet_link_tag 'frontend', media: 'all'
+    = csrf_meta_tags
+    = favicon_link_tag 'favicon.ico'
+  body
+    
+    /!LANG MENU
+    = build_lang_menu
+    
+    /! TOP MENU
+    / menu helper parameters:
+    / +menu_parent_id+ - starting menu element's id - this element will be displayed or not and all its children will be displayed
+    / +options+   - hash with following options:
+    /   +include_menu_parent+ - whether parent menu element should be displayed or not
+    /   +limit+      - how deep should builder look for children, count starts from 1
+    /   +hierarchical+ - specifies if you want to use hierarchical links or not
+    /   +with_nav+  - whether nav element should be generated
+    /   +nav_class+  - css class of the nav element
+    /   +active_class+  - css class of the active items
+    /   +item_class+  - css class of the items
+    /   +item_with_children_class+  - css class of the items that have children
+    /   +item_without_children_class+  - css class of the items without children
+    /   +ul_class+  - css class of the ul element
+    /   +ul_wrapper_class+ - css class of the ul wrapper class, if nil then wrapper for ul will not be generated
+    /   +ul_nested_class+  - css class of the nested ul element
+    /   +ul_nested_wrapper_class+ - css class of the ul wrapper class, generated only for nested uls, if nil then wrapper for nested ul will not be generated
+    /   +a_class+ - css class of the a element
+    /   +content_type+ - content types for which we'll build menu items(string or array e.g. "Mokio::Article" OR ["Mokio::Article", "Mokio::PicGallery"])
+    /   +content_item_class+ - css class of the content items (not Mokio::Menu, specified above)
+    /   +with_locale+ - whether add locale prefix to href
+    
+    = build_menu_extended @top_menu.id, {:with_locale => true}
+    
+    /! CONTENT
+    = yield
+
+    / RENDER HTML BLOCKS ON 'FOOTER' POSITION
+    /! EXAMPLE
+    /- @modules[:footer].each do |mod|
+    /  p = mod.content.html_safe
+    
+    = javascript_include_tag 'frontend'
+    = yield :js

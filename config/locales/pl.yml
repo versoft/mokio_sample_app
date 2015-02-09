@@ -1,0 +1,15 @@
+pl:
+  contents:
+    more: "czytaj więcej"
+    slug_prefix: "artykuly"
+  contacts: 
+    form: 
+      title: "formularz kontaktowy"
+      name: "imię i nazwisko"
+      email: "adres e-mail"
+      subject: "temat wiadomości"
+      text: "treść wiadomości"
+      copy: "Chcę otrzymać kopię listu na swój adres email."
+      send: "wyślij"
+  mail_sent: "Formularz kontaktowy został wysłany"
+  mail_not_sent: "Błąd podczas wysyłania formularza"    

@@ -1,0 +1,7 @@
+.pop-up-box
+  h4.pop-up-header = "#{(flash[:type].present?) ? flash[:type] : t("notice.info")}"
+  .pop-up-content.content
+    p = flash[:notice]
+  .text-center
+    a.pop-up-close_js.btn href="#"  ok
+  a.pop-up-close_js.pop-up-right-close href="#"  zamknij [x]
