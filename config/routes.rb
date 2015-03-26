@@ -21,7 +21,9 @@ Rails.application.routes.draw do
     # routes for non-hierarchical menu
     #
     #get "/:menu_id" => "content#show"
-    
+
+
+
   end
   
   

@@ -3,10 +3,16 @@ class Frontend::BaseController < ApplicationController
   layout "frontend"
   helper :application
   
+  before_filter :redirect_to_lang_prefix
   before_action :set_locale
   before_action :set_objects, :only => [:show, :home]
   
   protected
+  
+  
+    def redirect_to_lang_prefix
+      redirect_to "/#{I18n.locale}/", status: :moved_permanently if params[:locale].nil?
+    end
   
     def render_single(content)
       render :template => "frontend/#{mokio_type(content)}/show" if stale?(:etag => content, :last_modified => content.etag, :public => true)
